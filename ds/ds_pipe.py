@@ -45,7 +45,7 @@ def define_class(text):
     return kmeans.predict(text)
 
 def define_class_5(text):
-    with open('kmeans_5.pickle', 'rb') as f:
+    with open('kmeans_5g.pickle', 'rb') as f:
         kmeans = pickle.load(f)
     return kmeans.predict(text)
 
@@ -68,6 +68,7 @@ def main():
     class_log = define_class(log_transform)[0]
     if class_log == 5:
         class_log = define_class_5(log_transform)[0]
+        class_log = str(class_log) + '_5'
     print(log)
     print('class -', class_log)
 
