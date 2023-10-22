@@ -44,6 +44,11 @@ def define_class(text):
         kmeans = pickle.load(f)
     return kmeans.predict(text)
 
+def define_class_5(text):
+    with open('kmeans_5.pickle', 'rb') as f:
+        kmeans = pickle.load(f)
+    return kmeans.predict(text)
+
 def main():
     # input data 
     log = 'immediate job 2eec8d41 fd97 4fa2 aa9f e2d30a26c150 execution failed trying enqueue job'
@@ -60,8 +65,11 @@ def main():
     log_transform = tf_idf(log_df.log.values)
 
     # define class
+    class_log = define_class(log_transform)[0]
+    if class_log == 5:
+        class_log = define_class_5(log_transform)[0]
     print(log)
-    print('class -', define_class(log_transform)[0])
+    print('class -', class_log)
 
 if __name__ == '__main__':
     main()
